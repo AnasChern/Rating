@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css?family=Rajdhani:500,700&display=swap");
+body {
+  margin: 0;
+  font-family: "Rajdhani";
+}
+
+.navbar {
+  background-color: #3e3f5e;
+  padding: 10px 20px;
+}
+.navbar .navbar-inner {
+  display: flex;
+  justify-content: space-between;
+}
+.navbar .nav-btn {
+  color: white;
+  text-decoration: none;
+  margin: 0 5px;
+}
+.navbar .nav-btn:hover {
+  text-decoration: underline;
+}
+
+.logo {
+  margin: 0;
+  color: white;
+  font-family: "Rajdhani";
+}
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.sort-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.sort-container .sort-value {
+  border: none;
+  padding: 8px;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+@media (max-width: 768px) {
+  .sort-container {
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+}
+
+.search {
+  position: relative;
+}
+.search input {
+  width: 100%;
+  box-sizing: border-box;
+}
+.search .search-button {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #615dfa 0%, #3e3f5e 100%);
+}
+
+.search-input {
+  border-radius: 10px;
+  border: 0;
+  padding: 10px;
+  outline: none;
+}
+
+.rating-table {
+  width: 100%;
+  border-radius: 10px;
+  border-collapse: collapse;
+}
+
+.rating-page {
+  padding: 20px 50px;
+  background-color: #eeeeee;
+  min-height: calc(100vh - 85px);
+}
+@media (max-width: 768px) {
+  .rating-page {
+    padding: 10px;
+  }
+}
+
+tbody {
+  background-color: white;
+}
+
+tr {
+  border-bottom: 5px solid #eeeeee;
+}
+
+.cell-right {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.cell-left {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.gradient-box {
+  background: rgb(43, 88, 118);
+  background: linear-gradient(170deg, rgb(43, 88, 118) 0%, rgb(78, 67, 118) 100%);
+  color: white;
+  font-size: 48px;
+  font-weight: 600;
+  padding: 60px 0;
+}
+@media (max-width: 768px) {
+  .gradient-box {
+    padding: 10px;
+  }
+}
+
+.container {
+  padding: 50px;
+}
+
+.add-my-score {
+  font-size: 28px;
+  color: white;
+}
+.add-my-score:visited {
+  font-size: 28px;
+  color: white;
+}/*# sourceMappingURL=rating.css.map */

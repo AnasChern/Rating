@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/rating.css">
+    <title>Rating</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        
+        <div class="navbar-inner">
+            <h3 class="logo"> <a class="nav-btn" href="rating.html">SRating</a></h3>
+            
+            <div class="btn-container">
+                <a class="nav-btn" href="login.html">Log in</a>
+                <a class="nav-btn" href="registration.html">Sign up</a>
+            
+            </div>
+        </div>
+    </nav>
+    <div class="gradient-box">
+        <div class="container">
+            <div>
+                CHECK YOUR RATING <span><a class="add-my-score" href="user.html">Add my score</a></span> 
+            </div>
+        </div>
+    </div>
+
+    <section class="rating-page">
+        <div class="search-container">
+            <h2>Students rating</h2>
+            <div class="search">
+                <input type="text" placeholder="Search" class="search-input">
+                <button class="search-button"><svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M14.5 14.5L19 19" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg></button>
+            </div>
+        </div>
+        <div class="sort-container">
+            <span>Sort by</span>
+            <select name="sort-value" class="sort-value">
+                <option>Last name</option>
+                <option>Score</option>
+            </select>
+        </div>
+    
+    <table class="rating-table" cellpadding="10px" >
+        <thead>
+            <tr>
+                <td><b>Last name</b></td>
+                <td><b>First name</b></td>
+                <td><b>Score</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="cell-left">Hrechukh</td>
+                <td>Diana</td>
+                <td class="cell-right">190</td>
+            </tr>
+            <tr>
+                <td class="cell-left">Chernenko</td>
+                <td>Anastasiia</td>
+                <td class="cell-right">195</td>
+            </tr>
+            <tr>
+                <td class="cell-left">Kalyna</td>
+                <td>Yulia</td>
+                <td class="cell-right">155</td>
+            </tr>
+        </tbody>
+    </table>
+    </section>
+</body>
+
+</html>
