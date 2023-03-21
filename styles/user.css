@@ -227,7 +227,7 @@ form > .form-score > input:disabled {
   background-color: white;
   color: black;
 }
-form > .form-score > input[type=text], form > .form-score > input[type=password] {
+form > .form-score > input[type=text], form > .form-score > input[type=email], form > .form-score > input[type=tel], form > .form-score > input[type=password] {
   border: 0.075em solid #ddd;
 }
 form > .form-score > input:valid + span {

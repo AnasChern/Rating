@@ -24,6 +24,7 @@ body {
     height: 100vh;
     margin: 0;
 }
+
 .navbar {
     background-color: $colorDark;
     padding: 10px 20px;
@@ -53,7 +54,7 @@ body {
 
 .auth-page-wrapper {
     padding: 50px;
-    
+
     @include for-mobile-only() {
         padding: 10px;
         width: 100%;
@@ -88,8 +89,8 @@ body {
     background-color: #7b5dfa;
     border: .10em solid #7b5dfa;
     color: #fff;
-    cursor:pointer;
-    font-weight:bold;
+    cursor: pointer;
+    font-weight: bold;
     transition: all 300ms ease;
     height: min-content;
     padding: 10px 30px;
@@ -174,7 +175,7 @@ form {
 
             &[type=text],
             &[type=tel],
-            &[type="email"],
+            &[type=email],
             &[type=password] {
                 border: .075em solid #ddd;
             }
@@ -220,6 +221,7 @@ form {
 
 
     }
+
     &>.form-score {
         display: flex;
         margin: .75em 0;
@@ -234,7 +236,7 @@ form {
 
 
         &>span {
-            
+
 
             color: black;
             text-overflow: ellipsis;
@@ -266,6 +268,7 @@ form {
             font-weight: bold;
             transition: 100ms ease all;
             width: 10%;
+
             @include for-mobile-only() {
                 width: 100%;
             }
@@ -275,7 +278,11 @@ form {
                 color: black;
             }
 
+            
+
             &[type=text],
+            &[type=email],
+            &[type=tel],
             &[type=password] {
                 border: .075em solid #ddd;
             }
@@ -335,8 +342,8 @@ form {
 }
 
 
-form.user-score{ 
+form.user-score {
 
     margin-top: 1px;
-    
+
 }
