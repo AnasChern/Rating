@@ -163,5 +163,16 @@ tr {
     &:visited{
         font-size: 28px;
         color: white;
+        display: block;
+    }
+
+    @include for-mobile-only() {
+        display: block;
+
+        &:visited{
+            font-size: 28px;
+            color: white;
+            display: block;
+        }
     }
 }

@@ -144,4 +144,15 @@ tr {
 .add-my-score:visited {
   font-size: 28px;
   color: white;
+  display: block;
+}
+@media (max-width: 768px) {
+  .add-my-score {
+    display: block;
+  }
+  .add-my-score:visited {
+    font-size: 28px;
+    color: white;
+    display: block;
+  }
 }/*# sourceMappingURL=rating.css.map */
