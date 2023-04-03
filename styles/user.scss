@@ -51,7 +51,10 @@ body {
     font-family: $font;
 }
 
-
+.btn-container {
+    display: flex;
+    align-items: center;
+}
 .auth-page-wrapper {
     padding: 50px;
 
@@ -127,7 +130,7 @@ form {
         position: relative;
         width: 25%;
         flex-grow: 1;
-        overflow: hidden;
+        //overflow: hidden;
 
         @include for-mobile-only() {
             width: 100%;
@@ -136,11 +139,8 @@ form {
 
         &>span {
             background: #fff;
-
-            color: black;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
+            color: #adafca;
+           // color: black;
             display: inline-block;
             font-weight: 400;
             left: 1em;
@@ -152,7 +152,7 @@ form {
             transition: all 300ms ease;
             user-select: none;
             min-width: 0;
-            width: 90%;
+            
         }
 
         &>input,
@@ -167,6 +167,9 @@ form {
             font-weight: bold;
             transition: 100ms ease all;
             width: 100%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
 
             &:disabled {
                 background-color: white;
@@ -180,7 +183,7 @@ form {
                 border: .075em solid #ddd;
             }
 
-            &:valid {
+            &:valid, &:invalid, &:disabled, &:read-only {
                 &+span {
                     top: 0;
                     font-size: .90rem;
@@ -228,7 +231,7 @@ form {
         position: relative;
         width: 25%;
         flex-grow: 1;
-        overflow: hidden;
+       
 
         @include for-mobile-only() {
             width: 100%;
@@ -237,11 +240,9 @@ form {
 
         &>span {
 
-
-            color: black;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
+            background:white;
+            color: #adafca;
+          //  color: black;
             display: inline-block;
             font-weight: 400;
             left: 1em;
@@ -253,7 +254,6 @@ form {
             transition: all 300ms ease;
             user-select: none;
             min-width: 0;
-            width: 90%;
         }
 
         &>input,
@@ -267,7 +267,10 @@ form {
         &>input {
             font-weight: bold;
             transition: 100ms ease all;
-            width: 10%;
+            width: 15%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
 
             @include for-mobile-only() {
                 width: 100%;
@@ -287,10 +290,11 @@ form {
                 border: .075em solid #ddd;
             }
 
-            &:valid {
+            &:valid, &:invalid, &:disabled, &:read-only {
                 &+span {
                     top: 0;
                     font-size: .90rem;
+
                 }
             }
 
