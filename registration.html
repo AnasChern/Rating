@@ -16,40 +16,42 @@
         </header>
         <form>
             <div class="form-row">
-                <input type="text" required>
-                   <span>First name</span> 
-                
+                <input type="text" required id="firstName">
+                <span>First name</span>
+
             </div>
             <div class="form-row">
-                <input type="text" required>
+                <input type="text" required id="lastName">
                 <span>Last name</span>
             </div>
             <div class="form-row">
-                <input type="text" required>
+                <input type="text" required id="userName">
                 <span>Username</span>
             </div>
             <div class="form-row">
-                <input type="email" required>
+                <input type="email" required id="email">
                 <span>Email</span>
             </div>
             <div class="form-row">
-                <input type="tel" required pattern="^[0-9]*$">
+                <input type="tel" required pattern="^[0-9]*$" id="phone">
                 <span>Phone</span>
             </div>
             <div class="form-row">
-                <input type="text" required>
+                <input type="text" readonly value="STUDENT">
                 <span>Role</span>
             </div>
             <div class="form-row">
-                <input type="password" required>
+                <input type="password" required id="password">
                 <span>Password</span>
             </div>
-            <div class="form-row"></div>
+            <div class="form-row" id="error"></div>
+            <div class="form-row">If you already have account &nbsp<a href="login.html" class="login-btn">login</a></div>
             <div class="form-row">
-                <button type="submit">Register</button>
+                <button type="button" id="registerBtn">Register</button>
             </div>
         </form>
     </div>
 </body>
+<script src="registration.js"></script>
 
 </html>

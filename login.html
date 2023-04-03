@@ -14,18 +14,20 @@
         </header>
         <form>
           <div class="form-row">
-            <input type="text" required>
+            <input id="userName" type="text" required>
             <span>Username</span>
           </div>
           <div class="form-row">
-            <input type="password" required>
+            <input id="password"  type="password" required>
             <span>Password</span>
           </div>
-          <div class="form-row"></div>
+          <div class="form-row" id="error"></div>
+          <div class="form-row">If you don`t have account &nbsp<a href="login.html" class="login-btn">register</a></div>
           <div class="form-row">
-            <button type="submit">Login to your Account!</button>
+            <button id="loginBtn" type="button">Login to your Account!</button>
           </div>
         </form>
       </div>
+      <script src="login.js"></script>
 </body>
 </html>

@@ -36,6 +36,7 @@ form > .form-row {
   display: flex;
   margin: 0.75em 0;
   position: relative;
+  justify-content: center;
 }
 form > .form-row > span {
   background: #fff;
@@ -67,7 +68,11 @@ form > .form-row > input {
 form > .form-row > input[type=text], form > .form-row > input[type=email], form > .form-row > input[type=tel], form > .form-row > input[type=password] {
   border: 0.075em solid #ddd;
 }
-form > .form-row > input:valid + span {
+form > .form-row > input:-moz-read-only + span {
+  top: 0;
+  font-size: 0.9rem;
+}
+form > .form-row > input:valid + span, form > .form-row > input:invalid + span, form > .form-row > input:disabled + span, form > .form-row > input:read-only + span {
   top: 0;
   font-size: 0.9rem;
 }
@@ -105,4 +110,7 @@ form > .form-row > button:focus {
 }
 form > .form-row > button:hover {
   background-color: #6744f9;
+}
+form #error {
+  color: red;
 }/*# sourceMappingURL=auth.css.map */

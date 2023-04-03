@@ -35,6 +35,11 @@ body {
   font-family: "Rajdhani";
 }
 
+.btn-container {
+  display: flex;
+  align-items: center;
+}
+
 .auth-page-wrapper {
   padding: 50px;
 }
@@ -104,7 +109,6 @@ form > .form-row {
   position: relative;
   width: 25%;
   flex-grow: 1;
-  overflow: hidden;
 }
 @media (max-width: 768px) {
   form > .form-row {
@@ -113,10 +117,7 @@ form > .form-row {
 }
 form > .form-row > span {
   background: #fff;
-  color: black;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  color: #adafca;
   display: inline-block;
   font-weight: 400;
   left: 1em;
@@ -130,7 +131,6 @@ form > .form-row > span {
      -moz-user-select: none;
           user-select: none;
   min-width: 0;
-  width: 90%;
 }
 form > .form-row > input, form > .form-row > button {
   border-radius: 0.5em;
@@ -142,6 +142,9 @@ form > .form-row > input {
   font-weight: bold;
   transition: 100ms ease all;
   width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 form > .form-row > input:disabled {
   background-color: white;
@@ -150,7 +153,11 @@ form > .form-row > input:disabled {
 form > .form-row > input[type=text], form > .form-row > input[type=tel], form > .form-row > input[type=email], form > .form-row > input[type=password] {
   border: 0.075em solid #ddd;
 }
-form > .form-row > input:valid + span {
+form > .form-row > input:-moz-read-only + span {
+  top: 0;
+  font-size: 0.9rem;
+}
+form > .form-row > input:valid + span, form > .form-row > input:invalid + span, form > .form-row > input:disabled + span, form > .form-row > input:read-only + span {
   top: 0;
   font-size: 0.9rem;
 }
@@ -180,7 +187,6 @@ form > .form-score {
   position: relative;
   width: 25%;
   flex-grow: 1;
-  overflow: hidden;
 }
 @media (max-width: 768px) {
   form > .form-score {
@@ -188,10 +194,8 @@ form > .form-score {
   }
 }
 form > .form-score > span {
-  color: black;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  background: white;
+  color: #adafca;
   display: inline-block;
   font-weight: 400;
   left: 1em;
@@ -205,7 +209,6 @@ form > .form-score > span {
      -moz-user-select: none;
           user-select: none;
   min-width: 0;
-  width: 90%;
 }
 form > .form-score > input, form > .form-score > button {
   border-radius: 0.5em;
@@ -216,7 +219,10 @@ form > .form-score > input, form > .form-score > button {
 form > .form-score > input {
   font-weight: bold;
   transition: 100ms ease all;
-  width: 10%;
+  width: 15%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 @media (max-width: 768px) {
   form > .form-score > input {
@@ -230,7 +236,11 @@ form > .form-score > input:disabled {
 form > .form-score > input[type=text], form > .form-score > input[type=email], form > .form-score > input[type=tel], form > .form-score > input[type=password] {
   border: 0.075em solid #ddd;
 }
-form > .form-score > input:valid + span {
+form > .form-score > input:-moz-read-only + span {
+  top: 0;
+  font-size: 0.9rem;
+}
+form > .form-score > input:valid + span, form > .form-score > input:invalid + span, form > .form-score > input:disabled + span, form > .form-score > input:read-only + span {
   top: 0;
   font-size: 0.9rem;
 }

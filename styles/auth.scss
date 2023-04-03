@@ -42,6 +42,7 @@ form {
     display: flex;
     margin: .75em 0;
     position: relative;
+    justify-content: center;
     
     & > span { 
       background: #fff;
@@ -78,7 +79,7 @@ form {
         border: .075em solid #ddd;
       }
       
-      &:valid {
+      &:valid, &:invalid, &:disabled, &:read-only  {
         & + span {
           top: 0;
           font-size: .90rem;
@@ -114,8 +115,6 @@ form {
       }
     }
     
-    
-    
     & > button {
       background-color: #7b5dfa;
       border: .10em solid #7b5dfa;
@@ -133,5 +132,9 @@ form {
         background-color: darken(#7b5dfa, 5);
       }
     }
+  }
+
+  #error {
+    color: red;
   }
 }
