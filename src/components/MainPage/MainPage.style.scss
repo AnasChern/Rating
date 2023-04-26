@@ -24,6 +24,14 @@ body {
         display: flex;
         justify-content: space-between;
     }
+    .my-rating{
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        h4{
+            font-weight: 400;
+        }
+    }
 
     .nav-btn {
         color: white;
