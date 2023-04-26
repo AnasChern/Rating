@@ -6,8 +6,6 @@ import RegistrationPage from './components/Authorization/RegistrationPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import Header from './components/Header';
 
-
-
 function App() {
   const [isLoggedIn, setIsLoggedIn]= useState(false)
   const [userRating, setUserRating]= useState(null)
