@@ -16,9 +16,7 @@ const initialFormState = {
 export default function RegistrationPage() {
   const [formState, setFormState] = useState(initialFormState);
   const [error, setError] = useState(null);
-
   const navigate = useNavigate();
-
 
   function onInputChange(field, e) {
     setFormState({ ...formState, [field]: e.target.value });
@@ -54,24 +52,24 @@ export default function RegistrationPage() {
         </header>
         <form>
           <div className="form-row">
-            <input type="text" required id="firstname" value={formState.firstname} onChange={(e) => onInputChange('firstname', e)} />
+            <input data-testid='first-name-input' type="text" required id="firstname" value={formState.firstname} onChange={(e) => onInputChange('firstname', e)} />
             <span>First name</span>
 
           </div>
           <div className="form-row">
-            <input type="text" required id="lastName" value={formState.lastName} onChange={(e) => onInputChange('lastName', e)} />
+            <input data-testid='last-name-input' type="text" required id="lastName" value={formState.lastName} onChange={(e) => onInputChange('lastName', e)} />
             <span>Last name</span>
           </div>
           <div className="form-row">
-            <input type="text" required id="userName" value={formState.username} onChange={(e) => onInputChange('username', e)} />
+            <input data-testid='user-name-input' type="text" required id="userName" value={formState.username} onChange={(e) => onInputChange('username', e)} />
             <span>Username</span>
           </div>
           <div className="form-row">
-            <input type="email" required id="email" value={formState.email} onChange={(e) => onInputChange('email', e)} />
+            <input data-testid='email-input' type="email" required id="email" value={formState.email} onChange={(e) => onInputChange('email', e)} />
             <span>Email</span>
           </div>
           <div className="form-row">
-            <input type="tel" required pattern="^[0-9]*$" id="phone" value={formState.phone} onChange={(e) => onInputChange('phone', e)} />
+            <input data-testid='tel-input' type="tel" required pattern="^[0-9]*$" id="phone" value={formState.phone} onChange={(e) => onInputChange('phone', e)} />
             <span>Phone</span>
           </div>
           <div className="form-row">
@@ -79,11 +77,11 @@ export default function RegistrationPage() {
             <span>Role</span>
           </div>
           <div className="form-row">
-            <input type="password" required id="password" value={formState.password} onChange={(e) => onInputChange('password', e)} />
+            <input data-testid='password-input' type="password" required id="password" value={formState.password} onChange={(e) => onInputChange('password', e)} />
             <span>Password</span>
           </div>
           {error && <div className="form-row" id="error">{error}</div>}
-          <div className="form-row">If you already have account &nbsp;<Link to="/login" className="login-btn">login</Link></div>
+          <div className="form-row">If you already have account &nbsp;<Link data-testid='login-link' to="/login" className="login-btn">login</Link></div>
           <div className="form-row">
             <button type="button" id="registerBtn" onClick={register}>Register</button>
           </div>

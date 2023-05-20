@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Navigate } from 'react-router'
 import Button from '../Button/Button'
 import './ProfilPage.style.scss'
+import Error from '../Error/Error'
 
-export default function ProfilePage({setUserRating}) {
+export default function ProfilePage({ setUserRating }) {
   const [user, setUser] = useState({
     firstname: " ",
     lastName: "",
@@ -17,7 +18,8 @@ export default function ProfilePage({setUserRating}) {
   const [isScoreEdit, setIsScoreEdit] = useState(false)
   const token = localStorage.getItem("token")
   const userId = localStorage.getItem("userid")
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null)
+
   useEffect(() => {
     if (userId) {
       getUser();
@@ -25,37 +27,38 @@ export default function ProfilePage({setUserRating}) {
   }, [])
 
   async function getUser() {
-    try{
+    try {
 
-    const response = await fetch(`http://127.0.0.1:5000/user/${userId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
-    });
-    const responseScore = await fetch(`http://127.0.0.1:5000/rating/${userId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
-    });
-    const resData = await response.json();
-    const resScoreData = await responseScore.json();
+      const response = await fetch(`http://127.0.0.1:5000/user/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+      });
+      const responseScore = await fetch(`http://127.0.0.1:5000/rating/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+      });
+      const resData = await response.json();
+      const resScoreData = await responseScore.json();
 
-    if (response.status === 200) {
-      setUser(resData)
+
+      if (response.status === 200) {
+        setUser(resData)
+      }
+      if (responseScore.status === 200) {
+        setUser({ ...resData, score: resScoreData.score })
+        setUserRating(resScoreData.score)
+      }
+
     }
-    if (responseScore.status === 200) {
-      setUser({ ...resData, score: resScoreData.score })
-      setUserRating(resScoreData.score)
+    catch (err) {
+      setError(err)
     }
-
-  }
-  catch(err){
-    setError(err)
-  }
   }
 
   async function editUser() {
@@ -95,13 +98,11 @@ export default function ProfilePage({setUserRating}) {
 
   function handleInputChange(e, field) {
     setUser({ ...user, [field]: e.target.value })
-
   }
 
   function onEditUserClick() {
     if (isUserEdit) {
       editUser()
-
     } else {
       setIsUserEdit(true)
     }
@@ -110,7 +111,6 @@ export default function ProfilePage({setUserRating}) {
   function onEditScoreClick() {
     if (isScoreEdit) {
       editScore()
-
     } else {
       setIsScoreEdit(true)
     }
@@ -119,7 +119,7 @@ export default function ProfilePage({setUserRating}) {
   return userId ? <div className="profile-page-wrapper" >
     < header className="profile-header" >
       <h2>Your Personal Information</h2>
-      <Button onClick={onEditUserClick} text={isUserEdit ? "save" : "edit"}/>
+      <Button testid="edit-button-user" onClick={onEditUserClick} text={isUserEdit ? "save" : "edit"} />
     </header >
     <form className="user-form">
       <div className="form-row">
@@ -146,22 +146,20 @@ export default function ProfilePage({setUserRating}) {
         <input type="text" disabled value="STUDENT" id="role" />
         <span>Role</span>
       </div>
-
-      <Button isMobile={true} onClick={onEditUserClick} text={isUserEdit ? "save" : "edit"}/>
-
+      <Button isMobile={true} onClick={onEditUserClick} text={isUserEdit ? "save" : "edit"} />
     </form>
     <header className="profile-header">
       <h2>Your Score</h2>
-      <Button onClick={onEditScoreClick} text={isScoreEdit ? "save" : "edit"}/>
+      <Button testid="edit-button-score" onClick={onEditScoreClick} text={isScoreEdit ? "save" : "edit"} />
     </header>
     <form className="user-form user-score">
       <div className="form-score" >
         <input type="text" disabled={!isScoreEdit} id="input-score" value={user?.score} onChange={(e) => handleInputChange(e, "score")} />
         <span>Score</span >
       </div>
-      <Button isMobile={true} onClick={onEditScoreClick} text={isScoreEdit ? "save" : "edit"}/>
+      <Button isMobile={true} onClick={onEditScoreClick} text={isScoreEdit ? "save" : "edit"} />
     </form>
-    {error && <div>something wrong with network</div>}
+    <Error visible={error} text='something wrong with network' />
   </div >
     : <Navigate to="/login" />
 
