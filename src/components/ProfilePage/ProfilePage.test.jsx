@@ -158,3 +158,73 @@ test('should edit score', async () => {
         expect(screen.queryByDisplayValue('180')).toBeInTheDocument()
     })
 });
+
+test('should not edit user', async () => {
+    const fakeUser = {
+        firstname: "Anastasiia",
+        lastName: "Chernenko",
+        username: "ana56",
+        email: "ana@gmail.com",
+        phone: "0753532578",
+        role: "STUDENT"
+    }
+    const fakeScoreResponce = { score: "193" }
+    fetch.mockResolvedValueOnce({ json: () => Promise.resolve(fakeUser), status: 200 })
+    fetch.mockResolvedValueOnce({ json: () => Promise.resolve(fakeScoreResponce), status: 200 })
+    const mockedFunction = jest.fn()
+    await act(async () => {
+        render(
+            <BrowserRouter>
+                <ProfilePage setUserRating={mockedFunction} />
+            </BrowserRouter>
+        );
+    });
+    const button = screen.queryByTestId("edit-button-user")
+    fireEvent.click(button)
+    fireEvent.change(screen.queryByDisplayValue("Anastasiia"), { target: { value: 'Nastiia' } })
+    fireEvent.change(screen.queryByDisplayValue("Chernenko"), { target: { value: 'Cher' } })
+    fireEvent.change(screen.queryByDisplayValue("ana56"), { target: { value: 'nastiia56' } })
+    fireEvent.change(screen.queryByDisplayValue("ana@gmail.com"), { target: { value: 'nastiia@gmail.com' } })
+    fireEvent.change(screen.queryByDisplayValue("0753532578"), { target: { value: '0983532578' } })
+    fetch.mockRejectedValueOnce('server error')
+    await act(async () => {
+        fireEvent.click(button)
+    });
+    fetch.mockRejectedValueOnce('server error')
+    await waitFor(() => {
+        expect(screen.queryByText('something wrong with network')).toBeInTheDocument()
+    })
+});
+
+test('should not edit score', async () => {
+    const fakeUser = {
+        firstname: "Anastasiia",
+        lastName: "Chernenko",
+        username: "ana56",
+        email: "ana@gmail.com",
+        phone: "0753532578",
+        role: "STUDENT"
+    }
+    const fakeScoreResponce = { score: "193" }
+    fetch.mockResolvedValueOnce({ json: () => Promise.resolve(fakeUser), status: 200 })
+    fetch.mockResolvedValueOnce({ json: () => Promise.resolve(fakeScoreResponce), status: 200 })
+    const mockedFunction = jest.fn()
+    await act(async () => {
+        render(
+            <BrowserRouter>
+                <ProfilePage setUserRating={mockedFunction} />
+            </BrowserRouter>
+        );
+    });
+    const button = screen.queryByTestId("edit-button-score")
+    fireEvent.click(button)
+    fireEvent.change(screen.queryByDisplayValue("193"), { target: { value: "180" } })
+    fetch.mockRejectedValueOnce('server error')
+    await act(async () => {
+        fireEvent.click(button)
+    });
+    fetch.mockRejectedValueOnce('server error')
+    await waitFor(() => {
+        expect(screen.queryByText('something wrong with network')).toBeInTheDocument()
+    })
+});

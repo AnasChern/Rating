@@ -128,3 +128,25 @@ test('should have input fields', async () => {
     })
 
 });
+
+test('should register user', async () => {
+    const fakeResponse = {Response:"error status"};
+    const a = jest.spyOn(global, "fetch").mockImplementation(() => Promise.resolve({
+        status: 404, json: () => Promise.resolve(fakeResponse)
+    }));
+    await act(async () => {
+        render(
+            <BrowserRouter>
+                <RegistrationPage />
+            </BrowserRouter>
+        );
+    });
+    const registerBtn = screen.queryByText('Register')
+    act(() => {
+        registerBtn.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+    await waitFor(() => {
+        expect(screen.queryByText('error status')).toBeInTheDocument()
+        expect(mockedNavigate).not.toHaveBeenCalledWith('/login')
+    })
+});

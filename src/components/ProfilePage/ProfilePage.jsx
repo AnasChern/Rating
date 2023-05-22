@@ -93,7 +93,7 @@ export default function ProfilePage({ setUserRating }) {
       await response.json();
       setIsScoreEdit(false)
       getUser();
-    } catch (error) { console.error(error) }
+    } catch (error) { setError(error) }
   }
 
   function handleInputChange(e, field) {

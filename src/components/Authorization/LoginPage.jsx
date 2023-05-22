@@ -52,11 +52,11 @@ export default function LoginPage({ setIsLoggedIn }) {
         </header>
         <form>
           <div className="form-row">
-            <input id="userName" type="text" required value={username} onChange={onUsernameChange} />
+            <input data-testid='input-userName' id="userName" type="text" required value={username} onChange={onUsernameChange} />
             <span>Username</span>
           </div>
           <div className="form-row">
-            <input id="password" type="password" required value={password} onChange={onPasswordChange} />
+            <input data-testid='input-password' id="password" type="password" required value={password} onChange={onPasswordChange} />
             <span>Password</span>
           </div>
           {error && <div className="form-row" id="error">{error}</div>}

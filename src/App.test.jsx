@@ -54,7 +54,7 @@ test('should show current user rating', async () => {
     })
 });
 
-test('should show current user rating', async () => {
+test('should not show current user rating', async () => {
     global.fetch = jest.fn(() => Promise.reject('server error'))
     act(() => {
         render(
