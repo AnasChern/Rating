@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate } from 'react-router'
+import { useNavigate, Navigate } from 'react-router'
 import Button from '../Button/Button'
 import './ProfilPage.style.scss'
 import Error from '../Error/Error'
+import { ConfirmDialog } from './ConfirmDialog'
+import { Box } from '@mui/material'
 
-export default function ProfilePage({ setUserRating }) {
+
+
+export default function ProfilePage({ setUserRating, setIsLoggedIn }) {
+
   const [user, setUser] = useState({
     firstname: " ",
     lastName: "",
@@ -16,10 +21,14 @@ export default function ProfilePage({ setUserRating }) {
   })
   const [isUserEdit, setIsUserEdit] = useState(false)
   const [isScoreEdit, setIsScoreEdit] = useState(false)
+  const [isPasswordEdit, setIsPasswordEdit] = useState(false)
   const token = localStorage.getItem("token")
   const userId = localStorage.getItem("userid")
   const [error, setError] = useState(null)
-
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false)
+  const navigate = useNavigate();
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
   useEffect(() => {
     if (userId) {
       getUser();
@@ -51,7 +60,7 @@ export default function ProfilePage({ setUserRating }) {
         setUser(resData)
       }
       if (responseScore.status === 200) {
-        setUser({ ...resData, score: resScoreData.score })
+        setUser({ ...resData, score: resScoreData.score, password: '' })
         setUserRating(resScoreData.score)
       }
 
@@ -76,6 +85,50 @@ export default function ProfilePage({ setUserRating }) {
       setIsUserEdit(false)
       getUser();
     } catch (err) { setError(err) }
+  }
+
+  async function editPassword() {
+    const newPass = { currentPassword, newPassword }
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/user/password/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }, body: JSON.stringify(newPass)
+      })
+      const res=await response.json();
+      console.log(res)
+      if(res.Response==="Updated successful"){
+        setIsPasswordEdit(false)
+        getUser();
+      } 
+      else{setError(res.Response)}
+      
+    } catch (err) { setError(err) }
+  }
+
+
+  async function deleteUser() {
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/user/${userId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+      })
+      await response.json();
+    } catch (err) { setError(err) }
+  }
+
+  async function onDeleteUserClick() {
+    await deleteUser()
+    localStorage.removeItem('token')
+    localStorage.removeItem('userid')
+    setIsLoggedIn(false)
+    setUserRating(null)
+    navigate('/login')
   }
 
   async function editScore() {
@@ -116,6 +169,28 @@ export default function ProfilePage({ setUserRating }) {
     }
   }
 
+  function onEditPasswordClick(e) {
+    e.preventDefault()
+    if (isPasswordEdit) {
+      editPassword()
+    } else {
+      setIsPasswordEdit(true)
+    }
+  }
+
+  function onCancelPasswordEdit() {
+    setNewPassword('')
+    setCurrentPassword('')
+    setIsPasswordEdit(false)
+  }
+
+const handleClose = (event, reason) => {
+  if (reason === 'clickaway') {
+    return;
+  }
+
+  setError(false);
+};
   return userId ? <div className="profile-page-wrapper" >
     < header className="profile-header" >
       <h2>Your Personal Information</h2>
@@ -146,6 +221,7 @@ export default function ProfilePage({ setUserRating }) {
         <input type="text" disabled value="STUDENT" id="role" />
         <span>Role</span>
       </div>
+
       <Button isMobile={true} onClick={onEditUserClick} text={isUserEdit ? "save" : "edit"} />
     </form>
     <header className="profile-header">
@@ -159,7 +235,40 @@ export default function ProfilePage({ setUserRating }) {
       </div>
       <Button isMobile={true} onClick={onEditScoreClick} text={isScoreEdit ? "save" : "edit"} />
     </form>
-    <Error visible={error} text='something wrong with network' />
+    <header className="profile-header">
+      <h2>Account Settings</h2>
+    </header>
+    {!isPasswordEdit &&
+      <Box sx={{ pb: 2 }}>
+        <Button testid="edit-button-password" onClick={() => setIsPasswordEdit(true)} text='Change password' />
+      </Box>
+    }
+    {isPasswordEdit &&
+      <form  className="user-form user-score user-password">
+        <div className="form-score" >
+          <input className='password-change-input' type="password" id="current-password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
+          <span>Current Password</span >
+        </div>
+        <div className="form-score" >
+          <input className='password-change-input' type="password" id="new-password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+          <span>New Password</span >
+        </div>
+        <Button onClick={onEditPasswordClick} disabled={!newPassword || !currentPassword} type='button' text='save' />
+        <Button onClick={onCancelPasswordEdit} text='cancel' />
+        <Box className="mobile-edit-password-btns">
+        <Button isMobile={true} onClick={onEditPasswordClick} disabled={!newPassword || !currentPassword} type='button' text='save' />
+        <Button isMobile={true} onClick={onCancelPasswordEdit} text='cancel' />
+        </Box>
+      </form>}
+    <Box>
+      <Button onClick={() => setIsConfirmDialogOpen(true)} text='Delete account' />
+    </Box>
+    <Box className="mobile-settings-btns">
+      {!isPasswordEdit && <Button isMobile={true} testid="edit-button-password" onClick={() => setIsPasswordEdit(true)} text='Change password' />}
+      <Button isMobile={true} onClick={() => setIsConfirmDialogOpen(true)} text='Delete account' />
+    </Box>
+    {isConfirmDialogOpen && <ConfirmDialog open={isConfirmDialogOpen} handleClose={() => setIsConfirmDialogOpen(false)} onDelete={onDeleteUserClick} />}
+    <Error visible={!!error} text={error} handleClose={handleClose}/>
   </div >
     : <Navigate to="/login" />
 

@@ -18,13 +18,38 @@ $width-sm: 768px;
 }
 
 body {
-
     background: #efefef;
     font-family: $font, sans-serif;
     height: 100vh;
     margin: 0;
 }
 
+.user-form.user-score .form-score .password-change-input{
+   
+    width: 100%;
+
+}
+
+.mobile-settings-btns{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mobile-edit-password-btns{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+}
+
+.user-form.user-password{
+    align-items: center;
+    max-width: 80%;
+    @include for-mobile-only() {
+        max-width: 100%;
+    }
+}
 .navbar {
     background-color: $colorDark;
     padding: 10px 20px;

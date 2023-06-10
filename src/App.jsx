@@ -44,7 +44,7 @@ function App() {
         <Route path='/' element={<MainPage />} />
         <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/registration" element={<RegistrationPage />} />
-        <Route path="/profile" element={<ProfilePage setUserRating={setUserRating} />} />
+        <Route path="/profile" element={<ProfilePage setUserRating={setUserRating} setIsLoggedIn={setIsLoggedIn}/>} />
       </Routes>
     </BrowserRouter>
   );
