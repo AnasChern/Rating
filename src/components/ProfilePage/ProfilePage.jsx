@@ -5,7 +5,7 @@ import './ProfilPage.style.scss'
 import Error from '../Error/Error'
 import { ConfirmDialog } from './ConfirmDialog'
 import { Box } from '@mui/material'
-
+import SuccessMesage from '../SuccessMessage/SuccessMessage'
 
 
 export default function ProfilePage({ setUserRating, setIsLoggedIn }) {
@@ -19,6 +19,7 @@ export default function ProfilePage({ setUserRating, setIsLoggedIn }) {
     role: "",
     score: ""
   })
+
   const [isUserEdit, setIsUserEdit] = useState(false)
   const [isScoreEdit, setIsScoreEdit] = useState(false)
   const [isPasswordEdit, setIsPasswordEdit] = useState(false)
@@ -29,6 +30,8 @@ export default function ProfilePage({ setUserRating, setIsLoggedIn }) {
   const navigate = useNavigate();
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
+  const [showSuccess, setShowSuccess] = useState(false)
+
   useEffect(() => {
     if (userId) {
       getUser();
@@ -66,7 +69,7 @@ export default function ProfilePage({ setUserRating, setIsLoggedIn }) {
 
     }
     catch (err) {
-      setError(err)
+      setError("Internal Server Error")
     }
   }
 
@@ -83,8 +86,9 @@ export default function ProfilePage({ setUserRating, setIsLoggedIn }) {
       })
       await response.json();
       setIsUserEdit(false)
+      setShowSuccess("Updated successfully")
       getUser();
-    } catch (err) { setError(err) }
+    } catch (err) { setError("Internal Server Error") }
   }
 
   async function editPassword() {
@@ -101,11 +105,12 @@ export default function ProfilePage({ setUserRating, setIsLoggedIn }) {
       console.log(res)
       if(res.Response==="Updated successful"){
         setIsPasswordEdit(false)
+        setShowSuccess(res.Response)
         getUser();
       } 
       else{setError(res.Response)}
       
-    } catch (err) { setError(err) }
+    } catch (err) { setError("Internal Server Error") }
   }
 
 
@@ -119,7 +124,7 @@ export default function ProfilePage({ setUserRating, setIsLoggedIn }) {
         },
       })
       await response.json();
-    } catch (err) { setError(err) }
+    } catch (err) { setError("Internal Server Error") }
   }
 
   async function onDeleteUserClick() {
@@ -145,8 +150,9 @@ export default function ProfilePage({ setUserRating, setIsLoggedIn }) {
       })
       await response.json();
       setIsScoreEdit(false)
+      setShowSuccess("Updated successfully")
       getUser();
-    } catch (error) { setError(error) }
+    } catch (error) { setError("Internal Server Error") }
   }
 
   function handleInputChange(e, field) {
@@ -269,6 +275,7 @@ const handleClose = (event, reason) => {
     </Box>
     {isConfirmDialogOpen && <ConfirmDialog open={isConfirmDialogOpen} handleClose={() => setIsConfirmDialogOpen(false)} onDelete={onDeleteUserClick} />}
     <Error visible={!!error} text={error} handleClose={handleClose}/>
+    <SuccessMesage visible={!!showSuccess} text={showSuccess} handleClose={handleClose}/>
   </div >
     : <Navigate to="/login" />
 

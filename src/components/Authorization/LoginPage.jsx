@@ -36,11 +36,13 @@ export default function LoginPage({ setIsLoggedIn }) {
         setIsLoggedIn(true)
         navigate('/');
       } else {
+        
         setError(resData)
+        
       }
     }
     catch (err) {
-      setError(err)
+      setError("Internal Server Error")
     }
   }
 

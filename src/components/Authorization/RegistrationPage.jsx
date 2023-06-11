@@ -41,7 +41,7 @@ export default function RegistrationPage() {
       }
     }
     catch (err) {
-      setError(err)
+      setError("Internal Server Error")
     }
   }
   return (

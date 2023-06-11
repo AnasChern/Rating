@@ -86,7 +86,7 @@ export default function MainPage() {
             setAllUsers(users);
         }
         catch (err) {
-            setError(err)
+            setError("Internal Server Error")
         }
     }
 
